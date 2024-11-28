@@ -13,10 +13,12 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MapColorScheme;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class MapsFragment extends Fragment {
+public class MapsFragment extends SupportMapFragment {
 
     private OnMapReadyCallback callback = new OnMapReadyCallback() {
 
@@ -31,6 +33,17 @@ public class MapsFragment extends Fragment {
          */
         @Override
         public void onMapReady(GoogleMap googleMap) {
+
+            UiSettings settings = googleMap.getUiSettings();
+            settings.setZoomControlsEnabled(true);
+            settings.setCompassEnabled(true);
+
+            // Turn on the My Location layer and the related control on the map.
+            //MainActivity.updateLocationUI();
+
+            // Get the current location of the device and set the position of the map.
+            //MainActivity.getDeviceLocation();
+
             LatLng sydney = new LatLng(-34, 151);
             googleMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
             googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
