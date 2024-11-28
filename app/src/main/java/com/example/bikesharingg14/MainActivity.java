@@ -1,6 +1,8 @@
 package com.example.bikesharingg14;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.FrameLayout;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,6 +12,7 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.maps.MapFragment;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,12 +27,21 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-        // Initialize fragment
+        // Initialize map fragment
         Fragment fragment = new MapsFragment();
 
-        // Open fragment
+        // Open map fragment
         getSupportFragmentManager()
                 .beginTransaction().replace(R.id.frame_layout,fragment)
                 .commit();
+
+        // Initialize Bottom Sheet
+        FrameLayout framelayout = findViewById(R.id.bottom_sheet);
+        BottomSheetBehavior<View> sheetBehavior = BottomSheetBehavior.from(framelayout);
+
+        //Set Bottom Sheet peek height
+        sheetBehavior.setPeekHeight(200);
+        //Set Bottom Sheet to default collapse
+        sheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
     }
 }
