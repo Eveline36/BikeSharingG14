@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="citron">#FFFFE770</color>
-    <color name="citronripe">#FFFFD70F</color>
+    <color name="citronripe">#FFFC8861</color>
+    <color name="transparent">#00000000</color>
+    <color name="peach">#FFFA6F72</color>
+    <color name="darkpeach">#FF450215</color>
+
 </resources>

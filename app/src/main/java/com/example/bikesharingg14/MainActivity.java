@@ -11,6 +11,7 @@ import android.widget.FrameLayout;
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -69,11 +70,11 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
         // Initialize Bottom Sheet
-        FrameLayout framelayout = findViewById(R.id.bottom_sheet);
-        BottomSheetBehavior<View> sheetBehavior = BottomSheetBehavior.from(framelayout);
+        ConstraintLayout constraintLayout = findViewById(R.id.bottom_sheet);
+        BottomSheetBehavior<View> sheetBehavior = BottomSheetBehavior.from(constraintLayout);
 
         //Set Bottom Sheet peek height
-        sheetBehavior.setPeekHeight(100);
+        sheetBehavior.setPeekHeight(200);
         //Set Bottom Sheet to default collapse
         sheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
 
