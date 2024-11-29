@@ -1,12 +1,13 @@
 package com.example.bikesharingg14;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.FrameLayout;
+
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -29,6 +30,18 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback {
     //Map Fragment
@@ -44,10 +57,14 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     // A default location (Kelowna,Canada) and default zoom to use when location permission is not provided
     private final LatLng defaultLocation = new LatLng( 49.882114, -119.477829);
-    private static final int DEFAULT_ZOOM = 15;;
+    private static final int DEFAULT_ZOOM = 15;
 
     //Global Last Known Location Tracker
     private Location lastKnownLocation;
+
+    //BikeList and db handling
+    ArrayList<BikeModel> bikes = new ArrayList<>();
+    private static final Type BIKE_TYPE = new TypeToken<List<BikeModel>>() {}.getType();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +95,61 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         //Set Bottom Sheet to default collapse
         sheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
 
+        //Test Write Bikes to File
+        //testSaveBikes();
+
+        //Test Read Bikes
+        testReadBikes();
+
+
+    }
+
+    private void testReadBikes() {
+        String filename = "bikeFile.json";
+        String data="";
+        String line;
+
+        Gson gson = new Gson();
+
+        try {
+            FileInputStream fis = openFileInput(filename);
+            InputStreamReader isr = new InputStreamReader(fis);
+            // It creates a way to convert the raw data from the file into human-readable text.
+            BufferedReader br = new BufferedReader(isr);
+            while((line=br.readLine())!= null){
+                data += line;
+            }
+        }
+        catch (IOException ex){
+            ex.printStackTrace();
+        }
+        Log.d("ReadData",data);
+        bikes = gson.fromJson(data,BIKE_TYPE);
+        Log.d("ArrayData",bikes.toString());
+    }
+
+    private void testSaveBikes() {
+        bikes.add(new BikeModel(new LatLng(49.88400789743151, -119.4910478606105),12,true));
+        bikes.add(new BikeModel(new LatLng(49.88429273882145, -119.49109748073606),12,true));
+        bikes.add(new BikeModel(new LatLng(49.88287723492295, -119.49027649320611),12,true));
+
+        Gson gson = new Gson();
+
+        String filename = "bikeFile.json";
+        String fileContents = gson.toJson(bikes);
+        FileOutputStream outputStream; //allow a file to be opened for writing
+        try {
+            outputStream = openFileOutput(filename, Context.MODE_APPEND);
+            //This opens or creates a file with the given filename
+            // MODE_APPEND-> add data to the end of the file (file already exists)
+            // If the file doesn't exist, a new one will be created.
+            outputStream.write(fileContents.getBytes());
+            // Converts the file Contents from text (like words and sentences) into bytes.
+            outputStream.close();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void getLocationPermission(){
