@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.cardview.widget.CardView
@@ -23,8 +24,8 @@
 
             <ImageView
                 android:id="@+id/bikeicon"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:src="@drawable/mapbikeiconplaceholder"
                 android:scaleType="centerInside"
                 app:layout_constraintStart_toStartOf="parent"
@@ -42,7 +43,18 @@
                 android:layout_marginStart="20dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="12 Min Walk"
+                android:text="12"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@color/darkpeach"/>
+            <TextView
+                android:id="@+id/walkdurationlabel"
+                app:layout_constraintStart_toEndOf="@id/walkduration"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginStart="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Min Walk"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:textColor="@color/darkpeach"/>
@@ -63,7 +75,17 @@
                 app:layout_constraintStart_toEndOf="@id/rangelabel"
                 app:layout_constraintTop_toBottomOf="@id/walkduration"
                 android:layout_marginStart="3dp"
-                android:text="12Km Left"
+                android:text="12"
+                android:textColor="@color/darkpeach"/>
+
+            <TextView
+                android:id="@+id/rangelabel2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toEndOf="@id/rangeleft"
+                app:layout_constraintTop_toBottomOf="@id/walkduration"
+                android:layout_marginStart="3dp"
+                android:text="Km Left"
                 android:textColor="@color/darkpeach"/>
             <Button
                 android:layout_width="wrap_content"

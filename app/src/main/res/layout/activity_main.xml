@@ -6,11 +6,33 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
-    <fragment
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/topbar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/citron">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/baseline_menu_24"
+            app:layout_constraintTop_toTopOf="@id/topbar"
+            app:layout_constraintBottom_toBottomOf="@id/topbar"
+            app:layout_constraintStart_toStartOf="@id/topbar"
+            android:layout_marginStart="20dp"
+            android:scaleType="centerCrop" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginTop="50dp">
+    <fragment xmlns:map="http://schemas.android.com/apk/res-auto"
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        map:mapId="@string/map_id"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/bottom_sheet"
@@ -35,6 +57,7 @@
             app:layout_constraintTop_toBottomOf="@id/pullbar"
             android:layout_marginLeft="20dp"
             android:textStyle="bold"
+            android:textColor="@color/citronripe"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Bikes in the Area"
@@ -50,6 +73,7 @@
             android:src="@drawable/baseline_sort_24" />
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/bikerecycler"
             android:layout_width="match_parent"
             android:layout_marginTop="10dp"
             android:layout_height="330dp"

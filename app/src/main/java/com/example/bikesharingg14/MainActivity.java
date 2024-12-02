@@ -17,6 +17,8 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 
@@ -27,6 +29,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MapCapabilities;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
@@ -99,9 +102,20 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         //testSaveBikes();
 
         //Test Read Bikes
-        testReadBikes();
+        //testReadBikes();
 
+        //load bikes array with bike data
+        loadBikes();
 
+        RecyclerView recyclerView = findViewById(R.id.bikerecycler);
+        Bike_RecyclerViewAdapter adapter = new Bike_RecyclerViewAdapter(this,bikes);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+    }
+    private void testMapCapabilities(){
+        MapCapabilities mapCapabilities = map.getMapCapabilities();
+        Log.d("MapIconCheck","is advanced marker enabled?" + mapCapabilities.isAdvancedMarkersAvailable());
     }
 
     private void testReadBikes() {
@@ -128,10 +142,16 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         Log.d("ArrayData",bikes.toString());
     }
 
+    private void loadBikes(){
+        bikes.add(new BikeModel(new LatLng(49.88400789743151, -119.4910478606105),32,true,12));
+        bikes.add(new BikeModel(new LatLng(49.88429273882145, -119.49109748073606),22,true,8));
+        bikes.add(new BikeModel(new LatLng(49.88287723492295, -119.49027649320611),16,true,6));
+        bikes.add(new BikeModel(new LatLng(49.88400789743151, -119.4910478606105),2,true,3));
+        bikes.add(new BikeModel(new LatLng(49.88429273882145, -119.49109748073606),12,true,7));
+        bikes.add(new BikeModel(new LatLng(49.88287723492295, -119.49027649320611),16,true,9));
+    }
     private void testSaveBikes() {
-        bikes.add(new BikeModel(new LatLng(49.88400789743151, -119.4910478606105),12,true));
-        bikes.add(new BikeModel(new LatLng(49.88429273882145, -119.49109748073606),12,true));
-        bikes.add(new BikeModel(new LatLng(49.88287723492295, -119.49027649320611),12,true));
+        loadBikes();
 
         Gson gson = new Gson();
 
@@ -164,6 +184,9 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     public void onMapReady(GoogleMap map) {
         this.map = map;
+
+        //Test if Map can use CustomIcons
+        testMapCapabilities();
 
         // Prompt the user for permission.
         getLocationPermission();
@@ -247,5 +270,4 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             Log.e("Exception: %s", e.getMessage(), e);
         }
     }
-
 }
