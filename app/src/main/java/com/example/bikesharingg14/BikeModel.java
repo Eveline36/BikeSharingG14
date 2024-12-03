@@ -9,6 +9,16 @@ public class BikeModel {
     private int distance = 0;
     private int imageResource;
 
+    public int getMapImgResource() {
+        return mapImgResource;
+    }
+
+    public void setMapImgResource(int mapImgResource) {
+        this.mapImgResource = mapImgResource;
+    }
+
+    private int mapImgResource;
+
     public int getImageResource() {
         return imageResource;
     }
