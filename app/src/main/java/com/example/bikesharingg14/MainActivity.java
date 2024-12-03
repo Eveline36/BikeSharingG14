@@ -382,7 +382,7 @@ public class MainActivity extends AppCompatActivity implements
         //Uncomment and Fill Intent Data to Payment here!!
 
         /*
-        Intent intent = new Intent(this,payment.class); //Line to be edited
+        Intent intent = new Intent(MainActivity.this,payment.class); //Line to be edited
         Gson gson = new Gson();
         String markerBikeString = gson.toJson(markerBike);
         intent.putExtra("bikeString",markerBikeString);
