@@ -1,6 +1,12 @@
 package com.example.bikesharingg14;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import androidx.annotation.NonNull;
+
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 
 public class BikeModel {
     private LatLng position;
@@ -8,6 +14,15 @@ public class BikeModel {
     private boolean isFunctional = true;
     private int distance = 0;
     private int imageResource;
+    private Marker marker;
+
+    public Marker getMarker() {
+        return marker;
+    }
+
+    public void setMarker(Marker marker) {
+        this.marker = marker;
+    }
 
     public int getMapImgResource() {
         return mapImgResource;
@@ -84,6 +99,10 @@ public class BikeModel {
                 "position=" + position +
                 ", range=" + range +
                 ", isFunctional=" + isFunctional +
+                ", distance=" + distance +
+                ", imageResource=" + imageResource +
+                ", marker=" + marker +
+                ", mapImgResource=" + mapImgResource +
                 '}';
     }
 }

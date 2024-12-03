@@ -36,6 +36,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.UiSettings;
+import com.google.android.gms.maps.model.AdvancedMarker;
 import com.google.android.gms.maps.model.AdvancedMarkerOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapCapabilities;
@@ -262,8 +263,9 @@ public class MainActivity extends AppCompatActivity implements
                             .position(bike.getPosition())
                             .iconView(iconView)
                             .anchor(0.5f,0.5f)
-                            .title("Start Ride "));
-
+                            .title("Start Ride")
+                            .infoWindowAnchor(0.05f,-0.2f));
+            bike.setMarker((Marker) marker);
         }
     }
 
@@ -365,7 +367,27 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     public void onInfoWindowClick(@NonNull Marker marker) {
+        BikeModel markerBike = null;
+        for (BikeModel bike: bikes){
+            if(bike.getMarker().getId().equals(marker.getId()))
+                markerBike = bike;
+        }
         Log.d("Activity Change","Change to Payment Activity");
-        //Intent intent = new Intent();
+        if(markerBike!=null){
+            Log.d("Marker Bike",markerBike.toString());
+        }
+        else{
+            Log.d("Marker Bike","BIKE IS NULL");
+        }
+        //Uncomment and Fill Intent Data to Payment here!!
+
+        /*
+        Intent intent = new Intent(this,payment.class); //Line to be edited
+        Gson gson = new Gson();
+        String markerBikeString = gson.toJson(markerBike);
+        intent.putExtra("bikeString",markerBikeString);
+        startActivity(intent);
+        */
+
     }
 }
