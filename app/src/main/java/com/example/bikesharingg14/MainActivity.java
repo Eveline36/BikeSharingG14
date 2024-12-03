@@ -7,6 +7,7 @@ import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 
 
 import androidx.activity.EdgeToEdge;
@@ -28,8 +29,10 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.UiSettings;
+import com.google.android.gms.maps.model.AdvancedMarkerOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapCapabilities;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
@@ -144,11 +147,32 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     private void loadBikes(){
         bikes.add(new BikeModel(new LatLng(49.88400789743151, -119.4910478606105),32,true,12));
-        bikes.add(new BikeModel(new LatLng(49.88429273882145, -119.49109748073606),22,true,8));
+        bikes.add(new BikeModel(new LatLng(49.88002293198808, -119.4944645020253),22,true,8));
         bikes.add(new BikeModel(new LatLng(49.88287723492295, -119.49027649320611),16,true,6));
-        bikes.add(new BikeModel(new LatLng(49.88400789743151, -119.4910478606105),2,true,3));
-        bikes.add(new BikeModel(new LatLng(49.88429273882145, -119.49109748073606),12,true,7));
-        bikes.add(new BikeModel(new LatLng(49.88287723492295, -119.49027649320611),16,true,9));
+        bikes.add(new BikeModel(new LatLng(49.8899694811819, -119.4970673647022),2,true,3));
+        bikes.add(new BikeModel(new LatLng(49.88612985324062, -119.48931987386749),12,true,7));
+        bikes.add(new BikeModel(new LatLng(49.88027558735195, -119.48886072572553),16,true,9));
+
+        for (BikeModel bike:bikes) {
+            if(!bike.isFunctional()){
+                bike.setImageResource(R.drawable.bike_x);
+            }
+            else if(bike.getRange()>=0.90*BikeModel.BIKE_MAX_RANGE){
+               bike.setImageResource(R.drawable.bike_100);
+            }
+            else if(bike.getRange()>=0.75*BikeModel.BIKE_MAX_RANGE){
+                bike.setImageResource(R.drawable.bike_75);
+            }
+            else if(bike.getRange()>=0.50*BikeModel.BIKE_MAX_RANGE){
+                bike.setImageResource(R.drawable.bike_50);
+            }
+            else if(bike.getRange()>=0.33*BikeModel.BIKE_MAX_RANGE){
+                bike.setImageResource(R.drawable.bike_33);
+            }
+            else {
+                bike.setImageResource(R.drawable.bike_25);
+            }
+        }
     }
     private void testSaveBikes() {
         loadBikes();
@@ -200,6 +224,26 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         // Get the current location of the device and set the position of the map.
         getDeviceLocation();
+
+        loadBikeIcons();
+    }
+
+    private void loadBikeIcons() {
+
+        for(BikeModel bike: bikes) {
+            ImageView iconView = new ImageView(this);
+            iconView.setImageResource(bike.getImageResource());
+            //iconView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            iconView.setScaleY(0.07f);
+            iconView.setScaleX(0.07f);
+
+            Marker marker = map.addMarker(
+                    new AdvancedMarkerOptions()
+                            .position(bike.getPosition())
+                            .iconView(iconView)
+                            .anchor(0.5f,0.5f));
+
+        }
     }
 
     @Override

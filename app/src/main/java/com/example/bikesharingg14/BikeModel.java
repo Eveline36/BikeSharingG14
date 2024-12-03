@@ -7,6 +7,17 @@ public class BikeModel {
     private int range;
     private boolean isFunctional = true;
     private int distance = 0;
+    private int imageResource;
+
+    public int getImageResource() {
+        return imageResource;
+    }
+
+    public void setImageResource(int imageResource) {
+        this.imageResource = imageResource;
+    }
+
+
     public static final int BIKE_MAX_RANGE = 32;
 
     public int getDistance() {

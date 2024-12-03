@@ -40,24 +40,7 @@ public class Bike_RecyclerViewAdapter extends RecyclerView.Adapter <Bike_Recycle
         int tempRange = bikeModels.get(position).getRange();
 
         holder.RangeEst.setText(tempRange+"");
-        if(!bikeModels.get(position).isFunctional()){
-            holder.BikeIcon.setImageResource(R.drawable.bike_x);
-        }
-        else if(tempRange>=0.90*tempMaxRange){
-            holder.BikeIcon.setImageResource(R.drawable.bike_100);
-        }
-        else if(tempRange>=0.75*tempMaxRange){
-            holder.BikeIcon.setImageResource(R.drawable.bike_75);
-        }
-        else if(tempRange>=0.50*tempMaxRange){
-            holder.BikeIcon.setImageResource(R.drawable.bike_50);
-        }
-        else if(tempRange>=0.33*tempMaxRange){
-            holder.BikeIcon.setImageResource(R.drawable.bike_33);
-        }
-        else {
-            holder.BikeIcon.setImageResource(R.drawable.bike_25);
-        }
+        holder.BikeIcon.setImageResource(bikeModels.get(position).getImageResource());
 
     }
 
