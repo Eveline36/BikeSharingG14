@@ -2,19 +2,26 @@ package com.example.bikesharingg14;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -49,7 +56,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class MainActivity extends AppCompatActivity implements OnMapReadyCallback {
+public class MainActivity extends AppCompatActivity implements
+        OnMapReadyCallback,
+        GoogleMap.InfoWindowAdapter,
+        GoogleMap.OnMarkerClickListener,
+        GoogleMap.OnInfoWindowClickListener {
     //Map Fragment
     private GoogleMap map;
 
@@ -159,18 +170,23 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             }
             else if(bike.getRange()>=0.90*BikeModel.BIKE_MAX_RANGE){
                bike.setImageResource(R.drawable.bike_100);
+               bike.setMapImgResource(R.drawable.mapbike_100);
             }
             else if(bike.getRange()>=0.75*BikeModel.BIKE_MAX_RANGE){
                 bike.setImageResource(R.drawable.bike_75);
+                bike.setMapImgResource(R.drawable.mapbike_75);
             }
             else if(bike.getRange()>=0.50*BikeModel.BIKE_MAX_RANGE){
                 bike.setImageResource(R.drawable.bike_50);
+                bike.setMapImgResource(R.drawable.mapbike_50);
             }
             else if(bike.getRange()>=0.33*BikeModel.BIKE_MAX_RANGE){
                 bike.setImageResource(R.drawable.bike_33);
+                bike.setMapImgResource(R.drawable.mapbike_33);
             }
             else {
                 bike.setImageResource(R.drawable.bike_25);
+                bike.setMapImgResource(R.drawable.mapbike_25);
             }
         }
     }
@@ -226,22 +242,27 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         getDeviceLocation();
 
         loadBikeIcons();
+
+        map.setInfoWindowAdapter(this);
+        map.setOnInfoWindowClickListener(this);
+        map.setOnMarkerClickListener(this);
     }
 
     private void loadBikeIcons() {
 
         for(BikeModel bike: bikes) {
             ImageView iconView = new ImageView(this);
-            iconView.setImageResource(bike.getImageResource());
-            //iconView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            iconView.setScaleY(0.07f);
-            iconView.setScaleX(0.07f);
+            iconView.setImageResource(bike.getMapImgResource());
+            //iconView.setScaleType(ImageView.ScaleType.CENTER);
+            iconView.setScaleY(0.5f);
+            iconView.setScaleX(0.5f);
 
             Marker marker = map.addMarker(
                     new AdvancedMarkerOptions()
                             .position(bike.getPosition())
                             .iconView(iconView)
-                            .anchor(0.5f,0.5f));
+                            .anchor(0.5f,0.5f)
+                            .title("Start Ride "));
 
         }
     }
@@ -313,5 +334,38 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         } catch (SecurityException e)  {
             Log.e("Exception: %s", e.getMessage(), e);
         }
+    }
+
+    @Nullable
+    @Override
+    public View getInfoContents(@NonNull Marker marker) {
+        View infoview = getLayoutInflater().inflate(R.layout.infoview,null);
+        return infoview;
+    }
+
+    @Nullable
+    @Override
+    public View getInfoWindow(@NonNull Marker marker) {
+        TextView infoview = new TextView(this);
+        Resources res = getResources();
+        Drawable shape = ResourcesCompat.getDrawable(res, R.drawable.startridebg, getTheme());
+        infoview.setBackground(shape);
+        infoview.setTextColor(Color.argb(0xFF,0x45,0x02,0x15));
+        infoview.setText("Start Ride");
+
+        return infoview;
+    }
+
+    @Override
+    public boolean onMarkerClick(@NonNull Marker marker) {
+        Log.d("Marker Tapped","Marker Id:"+ marker.getId());
+        marker.showInfoWindow();
+        return true;
+    }
+
+    @Override
+    public void onInfoWindowClick(@NonNull Marker marker) {
+        Log.d("Activity Change","Change to Payment Activity");
+        //Intent intent = new Intent();
     }
 }
