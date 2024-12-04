@@ -438,7 +438,6 @@ private void testSaveBikes() {
         //Log.d("Recycler Clicked","At Position " +  position);
 
     }
-
     private void mapFocus(LatLng position) {
         if(map == null) return;
         cameraPosition = new CameraPosition.Builder()
@@ -448,6 +447,4 @@ private void testSaveBikes() {
         map.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
         sheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
     }
-
-
 }
