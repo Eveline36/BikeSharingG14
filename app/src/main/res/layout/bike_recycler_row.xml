@@ -100,7 +100,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:textColor="@color/darkpeach"
                 android:layout_marginEnd="20dp"
-                android:text="Start Ride"/>
+                android:text="Find Bike"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

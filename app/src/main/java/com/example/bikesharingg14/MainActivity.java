@@ -359,8 +359,8 @@ private void testSaveBikes() {
     @Nullable
     @Override
     public View getInfoContents(@NonNull Marker marker) {
-        View infoview = getLayoutInflater().inflate(R.layout.infoview,null);
-        return infoview;
+        //View infoview = getLayoutInflater().inflate(R.layout.infoview,null);
+        return null;
     }
 
     @Nullable
