@@ -3,6 +3,7 @@ package com.example.bikesharingg14;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 
 import androidx.activity.EdgeToEdge;
@@ -38,7 +39,21 @@ public class PaymentActivity extends AppCompatActivity {
 
     //This should be used to call the issue report menu
     public void reportBike(View v){
-        //Intent intent = new Intent(this,report.class);
-        //startActivity(intent);
+        Intent inputIntent = getIntent();
+        String bikeString = null;
+        if(inputIntent!=null){
+            bikeString = inputIntent.getStringExtra("bikeString");
+        }
+        else{
+            Log.d("Activity Transfer","Input Intent to Payment is null");
+        }
+        Intent intent = new Intent(this, ReportScreen.class);
+        if(bikeString!=null&&!bikeString.isEmpty()) {
+            intent.putExtra("reportBike", bikeString);
+        }
+        else{
+            Log.d("Activity Transfer","toReportBikeString is null");
+        }
+        startActivity(intent);
     }
 }
