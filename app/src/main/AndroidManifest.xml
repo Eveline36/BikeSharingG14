@@ -23,6 +23,10 @@
             android:exported="false" />
         <activity
             android:name=".ReceiptActivity"
+            android:name=".ReportScreen"
+            android:exported="false" />
+        <activity
+            android:name=".infoview"
             android:exported="false" />
 
         <meta-data
