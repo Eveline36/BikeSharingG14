@@ -47,7 +47,8 @@
         android:layout_marginTop="40dp"/>
 
     <ImageButton
-       android:layout_width="wrap_content"
+        android:id="@+id/receiptIcon"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/baseline_info_24"
         android:backgroundTint="@color/citronripe"
@@ -57,7 +58,20 @@
         android:scaleY="1.6"
         android:scaleType="centerCrop"
         android:layout_marginStart="5dp"
+        android:contentDescription="Reciept Icon"
+        android:onClick="openReceipt"
         />
+    <TextView
+        android:id="@+id/rateInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/receiptIcon"
+        app:layout_constraintEnd_toEndOf="@id/receiptIcon"
+        android:text="Rate: 0.50CAD per km"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:visibility="invisible"/>
+
 
     <Button
         android:id="@+id/paymentEndRideButton"
@@ -70,18 +84,20 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginBottom="20dp"
         android:textColor="@color/darkpeach"
-        android:backgroundTint="@color/citron"/>
+        android:backgroundTint="@color/citron"
+        android:onClick="endRide"/>
     <TextView
         android:id="@+id/paymentReportBikeButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Report Bike"
-        android:textSize="16dp"
+        android:textSize="16sp"
         android:textColor="#0000FF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginBottom="60dp"/>
+        android:layout_marginBottom="60dp"
+        android:onClick="reportBike" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
     <androidx.constraintlayout.widget.ConstraintLayout

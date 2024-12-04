@@ -1,0 +1,43 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    tools:context=".ReportScreen"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:gravity="center_vertical|center_horizontal"
+    android:background="@color/citronripe">
+
+<!-- Spinner for Report Type (moved further down using marginTop) -->
+<Spinner
+    android:id="@+id/spinnerReportType"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="20dp"
+    android:background="@color/citron"
+    android:layout_marginBottom="10dp"/>
+
+<!-- EditText for Optional Description (centered vertically and made longer) -->
+<EditText
+    android:id="@+id/editTextDescription"
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_weight="1"
+    android:hint="Description (Optional)"
+    android:inputType="textMultiLine"
+    android:lines="6"
+    android:gravity="top|start"
+    android:padding="8dp"
+    android:textColor="@color/darkpeach"
+    android:background="@color/citron"/>
+
+<!-- Submit Button -->
+<Button
+    android:id="@+id/btnSubmitReport"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Submit Report"
+    android:textColor="@color/darkpeach"/>
+</LinearLayout>
