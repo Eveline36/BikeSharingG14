@@ -1,10 +1,4 @@
 package com.example.bikesharingg14;
-
-import android.os.Parcel;
-import android.os.Parcelable;
-
-import androidx.annotation.NonNull;
-
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 
@@ -15,6 +9,7 @@ public class BikeModel {
     private int distance = 0;
     private int imageResource;
     private Marker marker;
+    private int mapImgResource;
 
     public Marker getMarker() {
         return marker;
@@ -31,8 +26,6 @@ public class BikeModel {
     public void setMapImgResource(int mapImgResource) {
         this.mapImgResource = mapImgResource;
     }
-
-    private int mapImgResource;
 
     public int getImageResource() {
         return imageResource;

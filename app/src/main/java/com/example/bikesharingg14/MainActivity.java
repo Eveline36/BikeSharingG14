@@ -120,7 +120,24 @@ public class MainActivity extends AppCompatActivity implements
         //testReadBikes();
 
         //load bikes array with bike data
-        loadBikes();
+
+        Intent intent = getIntent();
+        if(intent!=null) {
+            String bikeString = intent.getStringExtra("bikes");
+            Log.d("Intent Bike String", bikeString+"");
+            if (bikeString!=null && !bikeString.isEmpty()) {
+                Gson gson = new Gson();
+                bikes = gson.fromJson(bikeString, BIKE_TYPE);
+                loadBikeImages();
+            }
+            else{
+                loadBikes();    //CannotGetString.
+            }
+        }
+        else {
+            loadBikes();    //CannotGetIntent.
+        }
+        Log.d("Array Output", bikes.toString()+"");
 
         RecyclerView recyclerView = findViewById(R.id.bikerecycler);
         Bike_RecyclerViewAdapter adapter = new Bike_RecyclerViewAdapter(this,bikes);
@@ -165,33 +182,34 @@ public class MainActivity extends AppCompatActivity implements
         bikes.add(new BikeModel(new LatLng(49.88612985324062, -119.48931987386749),12,true,7));
         bikes.add(new BikeModel(new LatLng(49.88027558735195, -119.48886072572553),16,true,9));
 
-        for (BikeModel bike:bikes) {
-            if(!bike.isFunctional()){
+        loadBikeImages();
+        }
+
+    private void loadBikeImages() {
+        if (bikes.isEmpty() || bikes == null) return;
+        for (BikeModel bike : bikes) {
+            if (!bike.isFunctional()) {
                 bike.setImageResource(R.drawable.bike_x);
-            }
-            else if(bike.getRange()>=0.90*BikeModel.BIKE_MAX_RANGE){
-               bike.setImageResource(R.drawable.bike_100);
-               bike.setMapImgResource(R.drawable.mapbike_100);
-            }
-            else if(bike.getRange()>=0.75*BikeModel.BIKE_MAX_RANGE){
+            } else if (bike.getRange() >= 0.90 * BikeModel.BIKE_MAX_RANGE) {
+                bike.setImageResource(R.drawable.bike_100);
+                bike.setMapImgResource(R.drawable.mapbike_100);
+            } else if (bike.getRange() >= 0.75 * BikeModel.BIKE_MAX_RANGE) {
                 bike.setImageResource(R.drawable.bike_75);
                 bike.setMapImgResource(R.drawable.mapbike_75);
-            }
-            else if(bike.getRange()>=0.50*BikeModel.BIKE_MAX_RANGE){
+            } else if (bike.getRange() >= 0.50 * BikeModel.BIKE_MAX_RANGE) {
                 bike.setImageResource(R.drawable.bike_50);
                 bike.setMapImgResource(R.drawable.mapbike_50);
-            }
-            else if(bike.getRange()>=0.33*BikeModel.BIKE_MAX_RANGE){
+            } else if (bike.getRange() >= 0.33 * BikeModel.BIKE_MAX_RANGE) {
                 bike.setImageResource(R.drawable.bike_33);
                 bike.setMapImgResource(R.drawable.mapbike_33);
-            }
-            else {
+            } else {
                 bike.setImageResource(R.drawable.bike_25);
                 bike.setMapImgResource(R.drawable.mapbike_25);
             }
         }
     }
-    private void testSaveBikes() {
+
+private void testSaveBikes() {
         loadBikes();
 
         Gson gson = new Gson();
@@ -364,7 +382,17 @@ public class MainActivity extends AppCompatActivity implements
         marker.showInfoWindow();
         return true;
     }
+    public void sortView(View view){
+        Gson gson = new Gson();
+        for (BikeModel bike: bikes) {
+            bike.setMarker(null);
+        }
+        String bikesString = gson.toJson(bikes);
+        Intent intent = new Intent(MainActivity.this,SortBikes.class);
+        intent.putExtra("bikes",bikesString);
+        startActivity(intent);
 
+    }
     @Override
     public void onInfoWindowClick(@NonNull Marker marker) {
         BikeModel markerBike = null;
