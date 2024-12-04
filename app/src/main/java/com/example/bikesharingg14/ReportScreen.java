@@ -54,10 +54,10 @@ public class ReportScreen extends AppCompatActivity {
         });
 
         // Handle the Submit Button click
-        btnSubmitReport.setOnClickListener(v -> submitReport(selectedReportType));
+        btnSubmitReport.setOnClickListener(v -> submitReport());
     }
 
-    private void submitReport(String selectedReportType) {
+    private void submitReport() {
         // Get the description text
         reportDescription = editTextDescription.getText().toString().trim();
         Intent intent = getIntent();
@@ -83,7 +83,8 @@ public class ReportScreen extends AppCompatActivity {
             e.printStackTrace();
         }
         Toast.makeText(this, "Report Submitted: \n" + report, Toast.LENGTH_LONG).show();
-        finish();
+        Intent intent = new Intent(ReportScreen.this,MainActivity.class);
+        startActivity(intent);
     }
 
 }

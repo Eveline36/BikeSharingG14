@@ -55,7 +55,7 @@ public class PaymentActivity extends AppCompatActivity {
         }
         Intent intent = new Intent(this, ReportScreen.class);
         if(bikeString!=null&&!bikeString.isEmpty()) {
-            intent.putExtra("reportBike", bikeString);
+            intent.putExtra("bikeString", bikeString);
         }
         else{
             Log.d("Activity Transfer","toReportBikeString is null");
