@@ -379,6 +379,8 @@ public class MainActivity extends AppCompatActivity implements
         else{
             Log.d("Marker Bike","BIKE IS NULL");
         }
+
+
         //Uncomment and Fill Intent Data to Payment here!!
 
         /*
