@@ -38,6 +38,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.AdvancedMarker;
 import com.google.android.gms.maps.model.AdvancedMarkerOptions;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapCapabilities;
 import com.google.android.gms.maps.model.Marker;
@@ -61,9 +62,12 @@ public class MainActivity extends AppCompatActivity implements
         OnMapReadyCallback,
         GoogleMap.InfoWindowAdapter,
         GoogleMap.OnMarkerClickListener,
-        GoogleMap.OnInfoWindowClickListener {
-    //Map Fragment
+        GoogleMap.OnInfoWindowClickListener,
+        BikeRecyclerInterface{
+
+    //Map Fragment and Camera postion for updates
     private GoogleMap map;
+    CameraPosition cameraPosition;
 
     //Required for User location finding
     FusedLocationProviderClient fusedLocationProviderClient;
@@ -83,6 +87,12 @@ public class MainActivity extends AppCompatActivity implements
     //BikeList and db handling
     ArrayList<BikeModel> bikes = new ArrayList<>();
     private static final Type BIKE_TYPE = new TypeToken<List<BikeModel>>() {}.getType();
+
+    //Recycler holder
+    RecyclerView recyclerView;
+
+    //Variable to affect Bottom Sheet globally
+    BottomSheetBehavior<View> sheetBehavior;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,7 +116,7 @@ public class MainActivity extends AppCompatActivity implements
 
         // Initialize Bottom Sheet
         ConstraintLayout constraintLayout = findViewById(R.id.bottom_sheet);
-        BottomSheetBehavior<View> sheetBehavior = BottomSheetBehavior.from(constraintLayout);
+        sheetBehavior = BottomSheetBehavior.from(constraintLayout);
 
         //Set Bottom Sheet peek height
         sheetBehavior.setPeekHeight(200);
@@ -139,8 +149,8 @@ public class MainActivity extends AppCompatActivity implements
         }
         Log.d("Array Output", bikes.toString()+"");
 
-        RecyclerView recyclerView = findViewById(R.id.bikerecycler);
-        Bike_RecyclerViewAdapter adapter = new Bike_RecyclerViewAdapter(this,bikes);
+        recyclerView = findViewById(R.id.bikerecycler);
+        Bike_RecyclerViewAdapter adapter = new Bike_RecyclerViewAdapter(this,bikes,this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -181,6 +191,7 @@ public class MainActivity extends AppCompatActivity implements
         bikes.add(new BikeModel(new LatLng(49.8899694811819, -119.4970673647022),2,true,3));
         bikes.add(new BikeModel(new LatLng(49.88612985324062, -119.48931987386749),12,true,7));
         bikes.add(new BikeModel(new LatLng(49.88027558735195, -119.48886072572553),16,true,9));
+        bikes.add(new BikeModel(new LatLng(37.42421815450231, -122.0874276979905),32,true,200));
 
         loadBikeImages();
         }
@@ -359,8 +370,8 @@ private void testSaveBikes() {
     @Nullable
     @Override
     public View getInfoContents(@NonNull Marker marker) {
-        View infoview = getLayoutInflater().inflate(R.layout.infoview,null);
-        return infoview;
+        //View infoview = getLayoutInflater().inflate(R.layout.infoview,null);
+        return null;
     }
 
     @Nullable
@@ -413,9 +424,27 @@ private void testSaveBikes() {
 
         Intent intent = new Intent(MainActivity.this,PaymentActivity.class); //Line to be edited
         Gson gson = new Gson();
+        markerBike.setMarker(null);
         String markerBikeString = gson.toJson(markerBike);
         intent.putExtra("bikeString",markerBikeString);
         startActivity(intent);
 
+    }
+
+    @Override
+    public void onItemClick(int position) {
+        BikeModel targetBike = bikes.get(position);
+        mapFocus(targetBike.getPosition());
+        //Log.d("Recycler Clicked","At Position " +  position);
+
+    }
+    private void mapFocus(LatLng position) {
+        if(map == null) return;
+        cameraPosition = new CameraPosition.Builder()
+                .target(position)
+                .zoom(16)
+                .build();
+        map.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+        sheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
     }
 }

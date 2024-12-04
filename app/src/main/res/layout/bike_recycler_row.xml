@@ -93,6 +93,7 @@
                 android:textColor="@color/darkpeach"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
             <Button
+                android:id="@+id/findbikebutton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -100,7 +101,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:textColor="@color/darkpeach"
                 android:layout_marginEnd="20dp"
-                android:text="Start Ride"/>
+                android:text="Find Bike"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>
