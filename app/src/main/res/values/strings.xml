@@ -1,5 +1,12 @@
 <resources>
     <string name="app_name">BikeSharingG14</string>
     <string name="map_id">e41dcbcbfa294ee0</string>
+    <!--report types for spinner-->
+    <string-array name="report_types">
+        <item>Bike Damage</item>
+        <item>Low Bike Battery</item>
+        <item>Bike Missing</item>
+        <item>Other</item>
+    </string-array>
 
 </resources>
