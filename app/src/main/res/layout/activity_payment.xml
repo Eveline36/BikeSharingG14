@@ -4,20 +4,73 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".PaymentActivity">
+    android:layout_height="fill_parent"
+    tools:context=".PaymentActivity"
+    android:background="@color/citron">
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="450dp"
+    app:layout_constraintBottom_toBottomOf="parent"
+    android:background="@drawable/paymentlogobg">
 
     <TextView
         android:id="@+id/paymentTimeLeft"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="X minutes to destination."
-        android:textSize="24dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textSize="28sp"
+        android:layout_marginTop="45dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ProgressBar
+        android:id="@+id/paymentDistanceProgressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="300dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/paymentTimeLeft" />
+
+    <TextView
+        android:id="@+id/paymentCost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="$0.00"
+        android:textSize="60sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@+id/paymentDistanceProgressBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="40dp"/>
+
+    <ImageButton
+       android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/baseline_info_24"
+        android:backgroundTint="@color/citronripe"
+        app:layout_constraintStart_toEndOf="@id/paymentCost"
+        app:layout_constraintTop_toTopOf="@id/paymentCost"
+        android:scaleX="1.6"
+        android:scaleY="1.6"
+        android:scaleType="centerCrop"
+        android:layout_marginStart="5dp"
+        />
+
+    <Button
+        android:id="@+id/paymentEndRideButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="End Ride"
+        android:textSize="24dp"
+        app:layout_constraintBottom_toTopOf="@id/paymentReportBikeButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="20dp"
+        android:textColor="@color/darkpeach"
+        android:backgroundTint="@color/citron"/>
     <TextView
         android:id="@+id/paymentReportBikeButton"
         android:layout_width="wrap_content"
@@ -27,74 +80,22 @@
         android:textColor="#0000FF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.872" />
+        android:layout_marginBottom="60dp"/>
 
-    <ProgressBar
-        android:id="@+id/paymentDistanceProgressBar"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="299dp"
-        android:layout_height="23dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.437" />
-
-    <TextView
-        android:id="@+id/paymentCost"
-        android:layout_width="wrap_content"
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/logoview"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="$0.00"
-        android:textSize="30dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.591" />
-
-    <ImageButton
-        android:id="@+id/paymentReceiptButton"
-        android:layout_width="85dp"
-        android:layout_height="103dp"
-        android:layout_marginTop="340dp"
-        android:adjustViewBounds="true"
-        android:scaleType="fitCenter"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.828"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.145"
-        app:srcCompat="@drawable/receipt_icon" />
-
-    <Button
-        android:id="@+id/paymentEndRideButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="489dp"
-        android:text="End Ride"
-        android:textSize="24dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.284" />
-
-    <ImageView
-        android:id="@+id/paymentMainImage"
-        android:layout_width="245dp"
-        android:layout_height="166dp"
-        android:scaleX="-1"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.178"
-        app:srcCompat="@drawable/mapbikeiconplaceholder" />
+        app:layout_constraintTop_toTopOf="parent">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="300dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:src="@drawable/logoripe"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
