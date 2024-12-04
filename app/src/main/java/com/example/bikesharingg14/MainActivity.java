@@ -411,13 +411,11 @@ private void testSaveBikes() {
 
         //Uncomment and Fill Intent Data to Payment here!!
 
-        /*
-        Intent intent = new Intent(MainActivity.this,payment.class); //Line to be edited
+        Intent intent = new Intent(MainActivity.this,PaymentActivity.class); //Line to be edited
         Gson gson = new Gson();
         String markerBikeString = gson.toJson(markerBike);
         intent.putExtra("bikeString",markerBikeString);
         startActivity(intent);
-        */
 
     }
 }
