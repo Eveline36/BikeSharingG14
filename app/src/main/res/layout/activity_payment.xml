@@ -47,41 +47,44 @@
         android:layout_marginTop="40dp"/>
 
     <ImageButton
-       android:layout_width="wrap_content"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/baseline_info_24"
+        android:layout_marginStart="5dp"
         android:backgroundTint="@color/citronripe"
-        app:layout_constraintStart_toEndOf="@id/paymentCost"
-        app:layout_constraintTop_toTopOf="@id/paymentCost"
+        android:onClick="openReceipt"
+        android:scaleType="centerCrop"
         android:scaleX="1.6"
         android:scaleY="1.6"
-        android:scaleType="centerCrop"
-        android:layout_marginStart="5dp"
-        />
+        android:src="@drawable/baseline_info_24"
+        app:layout_constraintStart_toEndOf="@id/paymentCost"
+        app:layout_constraintTop_toTopOf="@id/paymentCost" />
 
     <Button
         android:id="@+id/paymentEndRideButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:backgroundTint="@color/citron"
+        android:onClick="endRide"
         android:text="End Ride"
+        android:textColor="@color/darkpeach"
         android:textSize="24dp"
         app:layout_constraintBottom_toTopOf="@id/paymentReportBikeButton"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="20dp"
-        android:textColor="@color/darkpeach"
-        android:backgroundTint="@color/citron"/>
+        app:layout_constraintStart_toStartOf="parent" />
+
     <TextView
         android:id="@+id/paymentReportBikeButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="60dp"
+        android:onClick="reportBike"
         android:text="Report Bike"
-        android:textSize="16dp"
         android:textColor="#0000FF"
+        android:textSize="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginBottom="60dp"/>
+        app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -3,7 +3,12 @@ package com.example.bikesharingg14;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -31,8 +36,22 @@ public class PaymentActivity extends AppCompatActivity {
     }
 
     public void openReceipt(View v){
-        Intent intent = new Intent(this,ReceiptActivity.class);
-        startActivity(intent);
+        LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+        View pview = inflater.inflate(R.layout.activity_receipt, null);
+        DisplayMetrics dm = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(dm);
+        int width = (int) (dm.widthPixels*0.7), height = (int) (dm.heightPixels*0.7);
+        PopupWindow popup = new PopupWindow(pview, width, height, true);
+
+        popup.showAtLocation(v, Gravity.CENTER, 0, 0);
+
+        pview.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                popup.dismiss();
+                return true;
+            }
+        });
     }
 
 
