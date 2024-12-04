@@ -23,12 +23,10 @@
             android:exported="false" />
         <activity
             android:name=".ReceiptActivity"
-            android:name=".ReportScreen"
             android:exported="false" />
         <activity
-            android:name=".infoview"
-            android:exported="false" />
-
+            android:name=".ReportScreen"
+            android:exported="false"/>
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDP7uR-UQXOx5mm9Zmwo6zcrp3XB1S7FPM" />
