@@ -185,13 +185,13 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     private void loadBikes(){
-        bikes.add(new BikeModel(new LatLng(49.88400789743151, -119.4910478606105),32,true,12));
-        bikes.add(new BikeModel(new LatLng(49.88002293198808, -119.4944645020253),22,true,8));
-        bikes.add(new BikeModel(new LatLng(49.88287723492295, -119.49027649320611),16,true,6));
-        bikes.add(new BikeModel(new LatLng(49.8899694811819, -119.4970673647022),2,true,3));
-        bikes.add(new BikeModel(new LatLng(49.88612985324062, -119.48931987386749),12,true,7));
-        bikes.add(new BikeModel(new LatLng(49.88027558735195, -119.48886072572553),16,true,9));
-        bikes.add(new BikeModel(new LatLng(37.42421815450231, -122.0874276979905),32,true,200));
+        bikes.add(new BikeModel(new LatLng(37.419521813201605, -122.08462966828192),32,true,12)); //
+        bikes.add(new BikeModel(new LatLng(37.4259285258699, -122.07858606686551),22,true,18)); //
+        bikes.add(new BikeModel(new LatLng(37.422201840400724, -122.08178980643982),16,true,6)); //
+        bikes.add(new BikeModel(new LatLng(37.42174241397411, -122.08020334041407),2,true,3)); //
+        bikes.add(new BikeModel(new LatLng(37.422027815572726, -122.08746076511663),12,true,7)); //
+        bikes.add(new BikeModel(new LatLng(37.42189555642939, -122.09046716206669),16,true,9)); //
+        bikes.add(new BikeModel(new LatLng(37.42421815450231, -122.0874276979905),32,true,3)); //
 
         loadBikeImages();
         }
