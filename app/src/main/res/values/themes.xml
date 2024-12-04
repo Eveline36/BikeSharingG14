@@ -7,5 +7,6 @@
         <item name="colorSecondary">@color/citronripe</item>
     </style>
 
+
     <style name="Theme.BikeSharingG14" parent="Base.Theme.BikeSharingG14" />
 </resources>

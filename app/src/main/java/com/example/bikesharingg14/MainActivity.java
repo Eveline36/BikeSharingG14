@@ -181,6 +181,7 @@ public class MainActivity extends AppCompatActivity implements
         bikes.add(new BikeModel(new LatLng(49.8899694811819, -119.4970673647022),2,true,3));
         bikes.add(new BikeModel(new LatLng(49.88612985324062, -119.48931987386749),12,true,7));
         bikes.add(new BikeModel(new LatLng(49.88027558735195, -119.48886072572553),16,true,9));
+        bikes.add(new BikeModel(new LatLng(37.42421815450231, -122.0874276979905),32,true,200));
 
         loadBikeImages();
         }
@@ -407,15 +408,16 @@ private void testSaveBikes() {
         else{
             Log.d("Marker Bike","BIKE IS NULL");
         }
+
+
         //Uncomment and Fill Intent Data to Payment here!!
 
-        /*
-        Intent intent = new Intent(MainActivity.this,payment.class); //Line to be edited
+        Intent intent = new Intent(MainActivity.this,PaymentActivity.class); //Line to be edited
         Gson gson = new Gson();
+        markerBike.setMarker(null);
         String markerBikeString = gson.toJson(markerBike);
         intent.putExtra("bikeString",markerBikeString);
         startActivity(intent);
-        */
 
     }
 }
